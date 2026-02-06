@@ -4,4 +4,9 @@
 
 ## [Unreleased]
 ### Added
-- Initial scaffold created from [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template)
+- Basic Robust YAML prototype support.
+- `ctrl+click` to find/jump to definitions and usages of prototypes.
+- Gutter icons to show which prototypes have inheritors and a navigation popup to go to them.
+
+### Known Bugs
+- Strange background highlighting in prototype files.

@@ -1,15 +1,22 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
-<idea-plugin>
-    <id>com.github.centronias.tiner</id>
-    <name>tiner</name>
+<idea-plugin package="com.centronias.tiner">
+    <name>Tiner</name>
+    <id>com.centronias.tiner</id>
     <vendor>centronias</vendor>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>org.jetbrains.plugins.yaml</depends>
 
-    <resource-bundle>messages.MyBundle</resource-bundle>
+    <resource-bundle>messages.RobustYaml</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.centronias.tiner.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
-        <postStartupActivity implementation="com.github.centronias.tiner.startup.MyProjectActivity" />
+        <psi.declarationProvider implementation="com.centronias.tiner.robustyaml.PrototypeDeclarationProvider"/>
+        <psi.symbolReferenceProvider hostElementClass="org.jetbrains.yaml.psi.YAMLScalar" hostLanguage="yaml"
+                                     implementationClass="com.centronias.tiner.robustyaml.PrototypeReferenceProvider"
+                                     targetClass="com.centronias.tiner.robustyaml.PrototypeReference"/>
+        <searcher forClass="com.intellij.find.usages.api.UsageSearchParameters"
+                  implementationClass="com.centronias.tiner.robustyaml.PrototypeUsageSearcher"/>
+        <codeInsight.lineMarkerProvider language="yaml"
+                                        implementationClass="com.centronias.tiner.robustyaml.RobustYamlLineMarkerProvider"/>
     </extensions>
 </idea-plugin>
