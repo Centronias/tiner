@@ -18,13 +18,14 @@ import org.jetbrains.yaml.psi.YAMLScalar
 interface PrototypeReferenceLike {
     val id: PrototypeId
 }
+
 data class PrototypeReference(
     override val source: YAMLScalar,
 ) : RobustYamlPsiSourcedSymbol, RobustYamlPsiSymbolReference, PrototypeReferenceLike {
     override val id: PrototypeId.Valid = PrototypeId.from(source) as PrototypeId.Valid
 
     override val referenceUsageType: UsageType? = when {
-        Prototype.Parents.pattern.accepts(source) -> UsageType("Inheritor")
+        Prototype.Parents.pattern.accepts(source) -> UsageType(Bundle.messagePointer("usage.prototype.parent-declaration"))
         else -> null
     }
 
